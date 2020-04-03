@@ -5,6 +5,7 @@
     <select clrSelect name="types" formControlName="productType">
       <option value="product">Produkt</option>
       <option value="storeWindow">Showcase</option>
+      <option value="voucher">Gutschein</option>
     </select>
   </clr-select-container>
   <clr-input-container>
@@ -30,7 +31,7 @@
     <label>Aktiv</label>
     <input clrInput type="checkbox" formControlName="active" clrToggle />
   </clr-input-container>
-  <ng-container *ngIf="'product' === form.get('productType').value">
+  <ng-container *ngIf="'storeWindow' !== form.get('productType').value">
     <h3>Preis</h3>
     <clr-input-container>
       <label>Preis</label>
