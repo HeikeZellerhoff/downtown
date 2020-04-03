@@ -9,6 +9,7 @@ import { map, take } from 'rxjs/operators';
 import { Category } from '../models/category.model';
 import { Country } from '../models/country.model';
 import { environment } from '../../../environments/environment';
+import { Voucher, VoucherListData } from '../models/voucher.model';
 
 @Injectable({
   providedIn: 'root'
@@ -114,6 +115,16 @@ export class MerchantApiService {
 
   deleteProduct(product: Product): Observable<void> {
     return this.http.delete<void>(this.apiUrl + '/merchant-api/products/' + product.id, {headers: this.getJsonContentTypeHeaders()});
+  }
+
+  getVouchers(): Observable<VoucherListData> {
+    // let params = new HttpParams();
+    // params = params.append('limit', limit.toString());
+    // params = params.append('offset', offset.toString());
+    return this.http.get<VoucherListData>(this.apiUrl + '/merchant-api/v1/voucher-funding/sold/vouchers', {
+      //params: params,
+      headers: this.getJsonContentTypeHeaders()
+    });
   }
 
   addImageToProduct(image: File, productId: string): Observable<any> {

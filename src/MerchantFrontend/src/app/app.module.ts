@@ -18,6 +18,7 @@ import { LocalDeliveryModule } from './views/local-delivery/local-delivery.modul
 
 import { MerchantAccountModule } from './views/merchant-account/merchant-account.module';
 import { MerchantHomeModule } from './views/merchant-home/merchant-home.module';
+import { MerchantVouchersModule } from './views/merchant-vouchers/merchant-vouchers.module';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { MerchantHomeModule } from './views/merchant-home/merchant-home.module';
     OrganizationDetailsModule,
     OrganizationRegisterModule,
     OrganizationLoginModule,
-    LocalDeliveryModule
+    LocalDeliveryModule,
+    MerchantVouchersModule
   ],
   declarations: [
     AppComponent,
