@@ -4,6 +4,7 @@ import { LoginService } from '../../core/services/login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MerchantApiService } from '../../core/services/merchant-api.service';
 import { ToastService } from '../../core/services/toast.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'portal-merchant-login',
@@ -26,7 +27,8 @@ export class MerchantLoginComponent implements OnInit {
     private readonly loginService: LoginService,
     private readonly formBuilder: FormBuilder,
     private readonly merchantApiService: MerchantApiService,
-    private readonly toastService: ToastService
+    private readonly toastService: ToastService,
+    private readonly translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -52,11 +54,15 @@ export class MerchantLoginComponent implements OnInit {
         result => {
           this.modalClosed();
           this.router.navigate(['/merchant/home']);
-          this.toastService.success('Erfolgreich eingeloggt');
+          this.toastService.success(
+            this.translateService.instant('MERCHANT.LOGIN.TOAST_MESSAGE.LOGIN_SUCCESS_HEADLINE')
+          );
         },
         () => {
           this.loginFailed = true;
-          this.toastService.error('Login fehlgeschlagen');
+          this.toastService.error(
+            this.translateService.instant('MERCHANT.LOGIN.TOAST_MESSAGE.LOGIN_ERROR_HEADLINE')
+          );
         }
       );
   }
@@ -66,7 +72,9 @@ export class MerchantLoginComponent implements OnInit {
       .resetPassword(this.passwordResetForm.value)
       .subscribe(() => {
         this.passwordResetForm.reset(this.initialResetFormValues);
-        this.toastService.success('E-Mail wurde erfolgreich abgeschickt');
+        this.toastService.success(
+          this.translateService.instant('MERCHANT.LOGIN.TOAST_MESSAGE.PASSWORD_RESET_SUCCESS_HEADLINE')
+        );
         this.passwordResetMode = false;
         this.modalClosed();
       });
